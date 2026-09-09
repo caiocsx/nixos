@@ -42,7 +42,7 @@
           }
 
           show_menu() {
-            rofi -dmenu -theme "${themes.listMenuTheme}" -p "$1"
+            rofi -dmenu -theme "${themes.listMenu}" -p "$1"
           }
 
           notify_info() {
@@ -54,7 +54,7 @@
             confirmed=$(printf "%s\n%s\n" "$ICON_YES" "$ICON_NO" | \
               rofi -dmenu -p "Confirmation" \
                 -mesg "Are you sure?" \
-                -theme "${themes.confirmTheme}")
+                -theme "${themes.confirm}")
 
             [[ "''${confirmed// /}" == "''${ICON_YES// /}" ]]
           }

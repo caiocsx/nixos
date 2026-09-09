@@ -39,7 +39,7 @@
             printf "%s\n%s\n" "$ICON_YES" "$ICON_NO" | \
               rofi -dmenu -p "Confirmation" \
                 -mesg "Are you sure?" \
-                -theme "${themes.confirmTheme}"
+                -theme "${themes.confirm}"
           }
 
           get_system_info() {
@@ -64,7 +64,7 @@
 
             rofi -dmenu -p " $current_user@$hostname_str" \
               -mesg " Last Login: $LAST_LOGIN |  Uptime: $UPTIME" \
-              -theme "${themes.powerMenuTheme}" <<<"$menu_items"
+              -theme "${themes.powerMenu}" <<<"$menu_items"
           }
 
           execute_action() {

@@ -1,4 +1,4 @@
-{ ui }:
+{ ui, ... }:
 ''
   * {
     bg:               ${ui.withAlpha ui.colors.bg ui.opacity.popups};

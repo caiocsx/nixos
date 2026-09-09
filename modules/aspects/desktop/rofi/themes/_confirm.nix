@@ -1,13 +1,9 @@
-{ ui }:
+{ ui, ... }:
 let
   theme = import ./_theme.nix { inherit ui; };
 in
 ''
   ${theme}
-
-  configuration {
-    font:              "${ui.font.propo} Bold 10";
-  }
 
   window {
     width:            400px;
@@ -56,7 +52,7 @@ in
     vertical-align:   0.5;
     horizontal-align: 0.5;
     cursor:           inherit;
-    font:             "${ui.font.propo} 28";
+    font:             "${ui.font.propo} Bold 28";
     text-color:       inherit;
     background-color: transparent;
   }

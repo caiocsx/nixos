@@ -1,4 +1,4 @@
-{ config, ui }:
+{ config, ui, ... }:
 let
   theme = import ./_theme.nix { inherit ui; };
 in
@@ -6,7 +6,7 @@ in
   ${theme}
 
   configuration {
-    font:                   "${ui.font.propo} Bold 10";
+    font:                   "${ui.font.propo} 10";
   }
 
   window {

@@ -10,7 +10,7 @@
 
     let
       themes = import ../themes/_default.nix { inherit config pkgs ui; };
-      
+
       wallpaperPicker = pkgs.writeShellApplication {
         name = "wallpaper-picker";
         runtimeInputs = with pkgs; [
@@ -232,7 +232,7 @@
             local rofi_output
             rofi_output=$(rofi -dmenu \
               -display-column-separator ":::" -display-columns 1 \
-              -i -theme "${themes.wallpaperPickerTheme}" <"$rofi_input_file")
+              -i -theme "${themes.wallpaperPicker}" <"$rofi_input_file")
 
             [ -z "$rofi_output" ] && return 1
 

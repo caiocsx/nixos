@@ -1,4 +1,4 @@
-{ config, ui }:
+{ config, ui, ... }:
 let
   theme = import ./_theme.nix { inherit ui; };
 in
@@ -13,7 +13,7 @@ in
     display-filebrowser: " ";
     display-window:      " ";
     display-run:         " ";
-    font:                "${ui.font.propo} Bold 10";
+    font:                "${ui.font.propo} 10";
     icon-theme:          "PapirusDark";
   }
 

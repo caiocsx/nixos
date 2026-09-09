@@ -17,7 +17,7 @@
           rofi
         ];
         text = ''
-          rofi -show drun -theme ${themes.launcherTheme}
+          rofi -show drun -theme ${themes.launcher}
         '';
       };
     in

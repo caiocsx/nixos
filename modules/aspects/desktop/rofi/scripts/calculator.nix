@@ -34,7 +34,7 @@
             -modi calc \
             -plugin-path "${pkgs.rofi-calc}/lib/rofi" \
             -qalc-binary "${qalcFiltered}/bin/qalc-filtered" \
-            -theme "${themes.calculatorTheme}" \
+            -theme "${themes.calculator}" \
             -no-show-match \
             -no-sort \
             -calc-command "printf '%s' '{result}' | sed 's/.*= //' | wl-copy" \
