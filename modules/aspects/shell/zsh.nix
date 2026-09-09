@@ -22,6 +22,8 @@
             path = "${config.xdg.cacheHome}/zsh/history";
           };
           initContent = ''
+            export YSU_IGNORED_ALIASES=("ls" "eza")
+            
             setopt share_history
             setopt correct
 
