@@ -228,7 +228,7 @@
         "<span size='12pt'>󰤥</span>"
         "<span size='12pt'>󰤨</span>"
       ];
-      ethernet = "<span size='14pt'>󰈀</span>";
+      ethernet = "<span size='12pt'>󰈀</span>";
       linked = "<span size='12pt'>󰲝</span>";
       disabled = "<span size='12pt'>󰤭</span>";
       disconnected = "<span size='12pt'>󰲛</span>";
