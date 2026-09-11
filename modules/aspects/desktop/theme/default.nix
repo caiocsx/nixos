@@ -1,16 +1,16 @@
 { inputs, ... }:
 {
-  den.aspects.stylix = {
+  den.aspects.theme = {
     nixos =
-      { lib, pkgs, ... }:
+      { pkgs, ... }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
-        
+
         stylix = {
           enable = true;
           polarity = "dark";
           base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-          image = ../../../assets/wallpapers/porsche.jpg;
+          image = ../../../../assets/wallpapers/porsche.jpg;
           cursor = {
             name = "Bibata-Modern-Ice";
             package = pkgs.bibata-cursors;
@@ -50,8 +50,12 @@
       };
 
     homeManager =
-      { pkgs, lib, ... }:
+      { config, lib, ... }:
       {
+        _module.args.ui = import ./_ui.nix {
+          inherit config lib;
+        };
+
         home.pointerCursor.enable = true;
         stylix.targets = {
           hyprland.enable = false;

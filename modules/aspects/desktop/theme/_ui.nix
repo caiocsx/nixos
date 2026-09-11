@@ -22,7 +22,8 @@ let
 
   stripHash = color: lib.strings.removePrefix "#" color;
 
-  toHex2 = opacity:
+  toHex2 =
+    opacity:
     let
       hex = lib.toHexString (builtins.floor (opacity * 255));
     in
@@ -33,7 +34,12 @@ let
   rgb = color: "rgb(${stripHash color})";
 in
 {
-  inherit stripHash withAlpha rgba rgb;
+  inherit
+    stripHash
+    withAlpha
+    rgba
+    rgb
+    ;
 
   colors = baseColors // {
     accent = currentAccent;

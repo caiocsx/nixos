@@ -1,7 +1,7 @@
 { ui }:
 
 let
-  cssVars = import ../../../lib/_css-theme.nix { inherit ui; };
+  cssVars = import ../theme/_css-theme.nix { inherit ui; };
 in
 ''
   ${cssVars}
