@@ -4,10 +4,18 @@
     { pkgs, ... }:
     {
       home = {
-        packages = with pkgs; [
-          bat
-          fd
-          ripgrep
+        packages = [
+          pkgs.bat
+          pkgs.fd
+          pkgs.ffmpeg
+          pkgs.gnutar
+          pkgs.nh
+          pkgs.nixfmt
+          pkgs.p7zip
+          pkgs.ripgrep
+          pkgs.tree
+          pkgs.unzip
+          pkgs.zip
         ];
 
         sessionVariables.MANPAGER = "sh -c 'col -bx | bat -l man -p'";
