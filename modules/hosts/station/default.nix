@@ -30,8 +30,8 @@
           # kernelPackages = pkgs.linuxPackages;  # Default: linuxPackages_zen
 
           # loader = {
-            # timeout = 10;                       # Default: 30
-            # grub.useOSProber = false;           # Default: true
+          # timeout = 10;                       # Default: 30
+          # grub.useOSProber = false;           # Default: true
           # };
         };
         hardware = {
@@ -44,10 +44,10 @@
           };
           graphics = {
             enable = true;
-            extraPackages = with pkgs; [
-              nvidia-vaapi-driver
-              libva-vdpau-driver
-              libvdpau-va-gl
+            extraPackages = [
+              pkgs.nvidia-vaapi-driver
+              pkgs.libva-vdpau-driver
+              pkgs.libvdpau-va-gl
             ];
           };
         };
@@ -63,8 +63,8 @@
 
           # --- Optional aspect overrides (uncomment to customize) ---
           # displayManager = {
-            # ly.animation = "doom";                 # Default: "matrix"
-            # sddm.astronaut.theme = "cyberpunk";    # Default: "pixel_sakura"
+          # ly.animation = "doom";                 # Default: "matrix"
+          # sddm.astronaut.theme = "cyberpunk";    # Default: "pixel_sakura"
           # };
 
           ollama = {
@@ -84,12 +84,6 @@
     provides.to-users.homeManager =
       { lib, pkgs, ... }:
       {
-        home.packages = with pkgs; [
-          opencode
-          heroic
-          mangohud
-        ];
-
         wayland.windowManager.hyprland = {
           extraConfig = lib.mkAfter ''
             -- --- Nvidia Env Vars ---

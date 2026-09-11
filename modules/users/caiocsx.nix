@@ -2,7 +2,6 @@
 {
   den.aspects.caiocsx = {
     includes = [
-      den.batteries.hostname
       den.batteries.define-user
       den.batteries.primary-user
       (den.batteries.user-shell "zsh")
@@ -40,16 +39,17 @@
     homeManager =
       { pkgs, ... }:
       {
-        home.packages = with pkgs; [
-          proton-vpn
-          proton-pass
-          protonmail-desktop
+        home.packages = [
+          pkgs.proton-vpn
+          pkgs.proton-pass
+          pkgs.protonmail-desktop
           # gimp
-          libresprite
-          obsidian
-          godot
+          pkgs.libresprite
+          pkgs.opencode
+          pkgs.obsidian
+          pkgs.godot
           # bruno
-          onlyoffice-desktopeditors
+          pkgs.onlyoffice-desktopeditors
         ];
 
         programs.git = {

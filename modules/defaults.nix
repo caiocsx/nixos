@@ -5,6 +5,8 @@
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
 
   den.default.includes = [
+    den.batteries.hostname
+
     den.aspects.boot
     den.aspects.nix
     den.aspects.nixpkgs
