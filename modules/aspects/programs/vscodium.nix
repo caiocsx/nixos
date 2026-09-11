@@ -5,10 +5,10 @@
     { pkgs, ui, ... }:
 
     let
-      extensions = with pkgs.vscode-marketplace; [
-        pkief.material-icon-theme
-        mkhl.direnv
-        jnoortheen.nix-ide
+      extensions = [
+        pkgs.vscode-marketplace.pkief.material-icon-theme
+        pkgs.vscode-marketplace.mkhl.direnv
+        pkgs.vscode-marketplace.jnoortheen.nix-ide
       ];
 
       commonSettings = {

@@ -13,11 +13,11 @@
 
       characterPicker = pkgs.writeShellApplication {
         name = "character-picker";
-        runtimeInputs = with pkgs; [
-          rofi
-          rofimoji
-          wl-clipboard
-          wtype
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.rofimoji
+          pkgs.wl-clipboard
+          pkgs.wtype
         ];
         text = ''
           rofi -modi "emoji:rofimoji --action copy --use-icons --hidden-descriptions

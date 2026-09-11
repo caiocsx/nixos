@@ -13,14 +13,14 @@
 
       wallpaperPicker = pkgs.writeShellApplication {
         name = "wallpaper-picker";
-        runtimeInputs = with pkgs; [
-          rofi
-          awww
-          libnotify
-          imagemagick
-          coreutils
-          findutils
-          gawk
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.awww
+          pkgs.libnotify
+          pkgs.imagemagick
+          pkgs.coreutils
+          pkgs.findutils
+          pkgs.gawk
         ];
         text = ''
           set_constants() {

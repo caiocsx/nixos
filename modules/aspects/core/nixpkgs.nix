@@ -1,15 +1,10 @@
 { inputs, ... }:
-let
-  nixpkgsConfig = {
-    config = {
-      allowUnfree = true;
-    };
-    overlays = [ inputs.nix-vscode-extensions.overlays.default ];
-  };
-in
 {
   den.aspects.nixpkgs.nixos = { ... }: {
-    nixpkgs = nixpkgsConfig;
+    nixpkgs = {
+      config.allowUnfree = true;
+      overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+    };
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
   };

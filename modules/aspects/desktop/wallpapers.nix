@@ -2,7 +2,7 @@
 {
   den.aspects.wallpapers.homeManager = { pkgs, ... }: {
     home = {
-      packages = with pkgs; [ awww ];
+      packages = [ pkgs.awww ];
 
       file."Pictures/Wallpapers" = {
         source = ../../../assets/wallpapers;

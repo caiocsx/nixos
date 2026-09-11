@@ -2,9 +2,9 @@
 
 pkgs.writeShellApplication {
   name = "hyprlock-media";
-  runtimeInputs = with pkgs; [
-    playerctl
-    coreutils
+  runtimeInputs = [
+    pkgs.playerctl
+    pkgs.coreutils
   ];
   text = ''
     output=""

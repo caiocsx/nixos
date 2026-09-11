@@ -7,9 +7,9 @@
         programs = {
           thunar = {
             enable = true;
-            plugins = with pkgs; [
-              thunar-archive-plugin
-              thunar-volman
+            plugins = [
+              pkgs.thunar-archive-plugin
+              pkgs.thunar-volman
             ];
           };
           xfconf.enable = true;
@@ -20,11 +20,11 @@
           tumbler.enable = true;
         };
 
-        environment.systemPackages = with pkgs; [
-          file-roller
-          ffmpegthumbnailer
-          gvfs
-          glib
+        environment.systemPackages = [
+          pkgs.file-roller
+          pkgs.ffmpegthumbnailer
+          pkgs.gvfs
+          pkgs.glib
         ];
       };
 

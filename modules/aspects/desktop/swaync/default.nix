@@ -7,9 +7,7 @@
       style = import ./_style.nix { inherit ui; };
     in
     {
-      home.packages = with pkgs; [
-        libnotify
-      ];
+      home.packages = [ pkgs.libnotify ];
 
       services.swaync = {
         enable = true;

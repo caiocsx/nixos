@@ -9,10 +9,10 @@
     ];
 
     homeManager = { pkgs, ... }: {
-      home.packages = with pkgs; [
-        hyprshot
-        hyprpicker
-        hyprshutdown
+      home.packages = [
+        pkgs.hyprshot
+        pkgs.hyprpicker
+        pkgs.hyprshutdown
       ];
 
       services.polkit-gnome.enable = true;

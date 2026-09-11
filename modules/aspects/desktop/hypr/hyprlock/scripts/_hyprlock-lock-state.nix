@@ -2,9 +2,7 @@
 
 pkgs.writeShellApplication {
   name = "hyprlock-lock-state";
-  runtimeInputs = with pkgs; [
-    coreutils
-  ];
+  runtimeInputs = [ pkgs.coreutils ];
   text = ''
     output=""
 

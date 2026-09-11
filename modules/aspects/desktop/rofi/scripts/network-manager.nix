@@ -13,14 +13,14 @@
 
       networkManager = pkgs.writeShellApplication {
         name = "network-manager";
-        runtimeInputs = with pkgs; [
-          rofi
-          networkmanager
-          libnotify
-          gnugrep
-          gawk
-          coreutils
-          gnused
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.networkmanager
+          pkgs.libnotify
+          pkgs.gnugrep
+          pkgs.gawk
+          pkgs.coreutils
+          pkgs.gnused
         ];
         text = ''
           set_constants() {

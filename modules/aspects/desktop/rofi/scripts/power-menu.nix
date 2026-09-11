@@ -13,12 +13,12 @@
 
       powerMenu = pkgs.writeShellApplication {
         name = "power-menu";
-        runtimeInputs = with pkgs; [
-          rofi
-          util-linux
-          procps
-          gnugrep
-          gawk
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.util-linux
+          pkgs.procps
+          pkgs.gnugrep
+          pkgs.gawk
         ];
         text = ''
           set_icons() {

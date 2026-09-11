@@ -12,10 +12,10 @@
 
       programs.spicetify = {
         enable = true;
-        enabledExtensions = with spicePkgs.extensions; [
-          adblock
-          hidePodcasts
-          shuffle
+        enabledExtensions = [
+          spicePkgs.extensions.adblock
+          spicePkgs.extensions.hidePodcasts
+          spicePkgs.extensions.shuffle
         ];
       };
     };

@@ -31,10 +31,10 @@
         hardware = {
           graphics = {
             enable = true;
-            extraPackages = with pkgs; [
-              libva
-              libva-utils
-              libvdpau-va-gl
+            extraPackages = [
+              pkgs.libva
+              pkgs.libva-utils
+              pkgs.libvdpau-va-gl
             ];
           };
         };
@@ -65,9 +65,7 @@
     provides.to-users.homeManager =
       { pkgs, ... }:
       {
-        home.packages = with pkgs; [
-          brightnessctl
-        ];
+        home.packages = [ pkgs.brightnessctl ];
 
         wayland.windowManager.hyprland.settings = {
           monitor = [

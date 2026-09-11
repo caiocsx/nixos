@@ -3,19 +3,19 @@
   den.aspects.core-packages.nixos =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
-        git
-        curl
-        wget
-        nano
-        psmisc
-        xdg-utils
-        util-linux
-        procps
-        pciutils
-        usbutils
-        hwinfo
-        lm_sensors
+      environment.systemPackages = [
+        pkgs.git
+        pkgs.curl
+        pkgs.wget
+        pkgs.nano
+        pkgs.psmisc
+        pkgs.xdg-utils
+        pkgs.util-linux
+        pkgs.procps
+        pkgs.pciutils
+        pkgs.usbutils
+        pkgs.hwinfo
+        pkgs.lm_sensors
       ];
     };
 }

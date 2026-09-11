@@ -13,15 +13,15 @@
 
       clipboardManager = pkgs.writeShellApplication {
         name = "clipboard-manager";
-        runtimeInputs = with pkgs; [
-          rofi
-          wl-clipboard
-          cliphist
-          util-linux
-          procps
-          gnugrep
-          gawk
-          libnotify
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.wl-clipboard
+          pkgs.cliphist
+          pkgs.util-linux
+          pkgs.procps
+          pkgs.gnugrep
+          pkgs.gawk
+          pkgs.libnotify
         ];
         text = ''
           set_constants() {

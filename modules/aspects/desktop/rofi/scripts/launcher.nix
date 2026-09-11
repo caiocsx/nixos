@@ -13,9 +13,7 @@
 
       launcher = pkgs.writeShellApplication {
         name = "launcher";
-        runtimeInputs = with pkgs; [
-          rofi
-        ];
+        runtimeInputs = [ pkgs.rofi ];
         text = ''
           rofi -show drun -theme ${themes.launcher}
         '';

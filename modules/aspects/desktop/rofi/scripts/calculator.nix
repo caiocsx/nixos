@@ -13,9 +13,9 @@
 
       qalcFiltered = pkgs.writeShellApplication {
         name = "qalc-filtered";
-        runtimeInputs = with pkgs; [
-          libqalculate
-          gnugrep
+        runtimeInputs = [
+          pkgs.libqalculate
+          pkgs.gnugrep
         ];
         text = ''
           qalc "$@" | grep -Ev '^warning: Unknown variables'
@@ -24,9 +24,9 @@
 
       calculator = pkgs.writeShellApplication {
         name = "calculator";
-        runtimeInputs = with pkgs; [
-          rofi
-          rofi-calc
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.rofi-calc
         ];
         text = ''
           rofi \

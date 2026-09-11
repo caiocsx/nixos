@@ -2,13 +2,13 @@
 
 pkgs.writeShellApplication {
   name = "hyprlock-sys-status";
-  runtimeInputs = with pkgs; [
-    coreutils
-    jq
-    networkmanager
-    iw
-    gawk
-    procps
+  runtimeInputs = [
+    pkgs.coreutils
+    pkgs.jq
+    pkgs.networkmanager
+    pkgs.iw
+    pkgs.gawk
+    pkgs.procps
   ];
   text = ''
     get_layout() {

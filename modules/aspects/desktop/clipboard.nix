@@ -18,9 +18,9 @@
       };
 
       config = {
-        home.packages = with pkgs; [
-          cliphist
-          wl-clipboard
+        home.packages = [
+          pkgs.cliphist
+          pkgs.wl-clipboard
         ];
 
         systemd.user.services.cliphist = {
