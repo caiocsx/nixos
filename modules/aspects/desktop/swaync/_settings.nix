@@ -64,7 +64,7 @@
         }
         {
           label = "";
-          command = "swaync-client -cp && hyprshot -m region -f $(date +%Y-%m-%d_%H-%M-%S).jpg -o ~/Pictures/Screenshots";
+          command = "swaync-client -cp && screenshot --region";
         }
         {
           label = "";

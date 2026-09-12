@@ -7,6 +7,7 @@
       den.aspects.waybar
       den.aspects.swaync
       den.aspects.clipboard
+      den.aspects.screenshot
       den.aspects.theme
       den.aspects.xdg
       den.aspects.wallpapers

@@ -91,16 +91,10 @@ in
   (bind "SUPER + V" (dsp.exec "clipboard-manager -H"))
   (bind "SUPER + SHIFT + V" (dsp.exec "clipboard-manager"))
 
-  # --- Screenshots (Hyprshot) ---
-  (bind "SUPER + PRINT" (
-    dsp.exec "hyprshot -m window -f $(date +%Y-%m-%d_%H-%M-%S).png -o ~/Pictures/Screenshots"
-  ))
-  (bind "SUPER + SHIFT + PRINT" (
-    dsp.exec "hyprshot -m region -f $(date +%Y-%m-%d_%H-%M-%S).png -o ~/Pictures/Screenshots"
-  ))
-  (bind "SUPER + CTRL + PRINT" (
-    dsp.exec "hyprshot -m output -f $(date +%Y-%m-%d_%H-%M-%S).png -o ~/Pictures/Screenshots"
-  ))
+  # --- Screenshots ---
+  (bind "SUPER + PRINT" (dsp.exec "screenshot --window"))
+  (bind "SUPER + SHIFT + PRINT" (dsp.exec "screenshot --region"))
+  (bind "SUPER + CTRL + PRINT" (dsp.exec "screenshot --output"))
 
   # --- Accessibility / Screen Zoom ---
   (bind "SUPER + ALT + mouse_up" (lua "function() hl.config({ cursor = { zoom_factor = 1.5 } }) end"))

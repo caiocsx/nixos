@@ -10,7 +10,6 @@
 
     homeManager = { pkgs, ... }: {
       home.packages = [
-        pkgs.hyprshot
         pkgs.hyprpicker
         pkgs.hyprshutdown
       ];
