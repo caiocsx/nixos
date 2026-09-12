@@ -88,8 +88,8 @@ in
   (bind "SUPER + SHIFT + D" (dsp.exec "wallpaper-picker --next"))
 
   # --- Clipboard Management ---
-  (bind "SUPER + V" (dsp.exec "clipboard-manager -H"))
-  (bind "SUPER + SHIFT + V" (dsp.exec "clipboard-manager"))
+  (bind "SUPER + V" (dsp.exec "clipboard-manager --history"))
+  (bind "SUPER + SHIFT + V" (dsp.exec "clipboard-manager --favorites"))
 
   # --- Screenshots ---
   (bind "SUPER + PRINT" (dsp.exec "screenshot --window"))
