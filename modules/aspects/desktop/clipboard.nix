@@ -8,7 +8,7 @@
       ...
     }:
     let
-      cfg = config.clipboard;
+      cliphistStore = import ./_cliphist-store.nix { inherit config pkgs; };
     in
     {
       options.clipboard.maxItems = lib.mkOption {
@@ -30,7 +30,7 @@
             After = [ "graphical-session.target" ];
           };
           Service = {
-            ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist -max-items ${toString cfg.maxItems} store";
+            ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${cliphistStore}/bin/cliphist-store";
             Restart = "on-failure";
           };
           Install.WantedBy = [ "graphical-session.target" ];

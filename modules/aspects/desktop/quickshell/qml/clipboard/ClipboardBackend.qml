@@ -28,6 +28,13 @@ Scope {
         run(["--add-favorite", item.id], "add-favorite")
     }
 
+    function toggleFavorite(item, mode) {
+        if (item.favorite)
+            run(["--remove-favorite", mode === "favorites" ? item.token : item.favoriteToken], "remove-favorite")
+        else
+            addFavorite(item)
+    }
+
     function remove(item, mode) {
         if (mode === "favorites")
             run(["--remove-favorite", item.token], "remove-favorite")

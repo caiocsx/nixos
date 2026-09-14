@@ -13,7 +13,7 @@ Button {
 
     contentItem: Text {
         text: root.text
-        color: root.enabled ? root.danger ? Theme.red : Theme.foreground : Theme.disabled
+        color: root.enabled ? root.danger ? Theme.red : Theme.fg : Theme.muted
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.family: Theme.fontFamily
@@ -22,8 +22,8 @@ Button {
     }
 
     background: Rectangle {
-        radius: 6
-        color: root.active ? Theme.active : root.hovered ? Theme.hover : Theme.button
+        radius: Theme.radius
+        color: root.active ? Theme.withAlpha(Theme.accent, 0.34) : root.hovered ? Theme.withAlpha(Theme.accent, 0.18) : Theme.withAlpha(Theme.fg, 0.1)
         border.width: root.active ? 1 : 0
         border.color: Theme.accent
     }

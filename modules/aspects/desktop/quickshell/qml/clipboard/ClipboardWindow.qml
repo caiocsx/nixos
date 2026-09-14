@@ -14,14 +14,29 @@ PanelWindow {
     property bool confirmationVisible: false
     property string confirmationAction: ""
     property string statusMessage: ""
+    property string selectedKey: ""
+    property int currentTime: Math.floor(Date.now() / 1000)
     readonly property var sourceItems: mode === "favorites" ? backend.favoriteItems : backend.historyItems
     readonly property var filteredItems: sourceItems.filter(item => item.text.toLowerCase().includes(query.toLowerCase()))
 
-    onFilteredItemsChanged: listView.currentIndex = filteredItems.length > 0 ? 0 : -1
+    onFilteredItemsChanged: {
+        const previousIndex = filteredItems.findIndex(item => itemKey(item) === selectedKey)
+        selectItem(previousIndex >= 0 ? previousIndex : filteredItems.length > 0 ? 0 : -1)
+    }
+
+    function itemKey(item) {
+        return mode === "favorites" ? item.token : item.id
+    }
+
+    function selectItem(index) {
+        listView.currentIndex = index
+        selectedKey = index >= 0 && index < filteredItems.length ? itemKey(filteredItems[index]) : ""
+    }
 
     function showMode(requestedMode) {
         mode = requestedMode === "favorites" ? "favorites" : "history"
         query = ""
+        selectedKey = ""
         confirmationVisible = false
         visible = true
         backend.refresh(mode)
@@ -49,6 +64,7 @@ PanelWindow {
     function switchMode(nextMode) {
         mode = nextMode
         query = ""
+        selectedKey = ""
         statusMessage = ""
         backend.refresh(mode)
         Qt.callLater(() => searchField.forceActiveFocus())
@@ -57,9 +73,16 @@ PanelWindow {
     visible: false
     implicitWidth: 760
     implicitHeight: 540
-    color: "transparent"
+    color: Theme.withAlpha(Theme.bg, 0)
     exclusionMode: ExclusionMode.Ignore
     focusable: true
+
+    Timer {
+        interval: 30000
+        running: root.visible
+        repeat: true
+        onTriggered: root.currentTime = Math.floor(Date.now() / 1000)
+    }
 
     IpcHandler {
         target: "clipboard"
@@ -97,28 +120,28 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        anchors.margins: 4
-        radius: 11
-        color: Theme.background
-        border.width: 1
-        border.color: Theme.border
+        anchors.margins: Theme.gap
+        radius: Theme.radius
+        color: Theme.bg
+        border.width: Theme.borderWidth
+        border.color: Theme.accent
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 12
-            spacing: 10
+            anchors.margins: Theme.outerGap
+            spacing: Theme.outerGap
 
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 46
-                radius: 8
+                radius: Theme.radius
                 color: Theme.surface
 
                 RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: 14
                     anchors.rightMargin: 14
-                    spacing: 10
+                    spacing: Theme.outerGap
 
                     Text {
                         text: ""
@@ -132,10 +155,10 @@ PanelWindow {
                         Layout.fillWidth: true
                         placeholderText: "Search clipboard..."
                         text: root.query
-                        color: Theme.foreground
+                        color: Theme.fg
                         placeholderTextColor: Theme.muted
-                        selectionColor: Theme.active
-                        selectedTextColor: Theme.foreground
+                        selectionColor: Theme.withAlpha(Theme.accent, 0.34)
+                        selectedTextColor: Theme.fg
                         font.family: Theme.fontFamily
                         font.pixelSize: 12
                         background: null
@@ -153,9 +176,11 @@ PanelWindow {
                                 }
                             } else if (event.key === Qt.Key_Down) {
                                 listView.incrementCurrentIndex()
+                                root.selectItem(listView.currentIndex)
                                 event.accepted = true
                             } else if (event.key === Qt.Key_Up) {
                                 listView.decrementCurrentIndex()
+                                root.selectItem(listView.currentIndex)
                                 event.accepted = true
                             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                 root.copySelected()
@@ -178,7 +203,7 @@ PanelWindow {
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: 8
+                spacing: Theme.gap
 
                 Text {
                     text: root.mode === "favorites" ? "FAVORITES" : "CLIPBOARD HISTORY"
@@ -227,11 +252,15 @@ PanelWindow {
                     itemData: modelData
                     itemIndex: index
                     selected: ListView.isCurrentItem
-                    onHovered: listView.currentIndex = index
+                    currentTime: root.currentTime
+                    actionsEnabled: !backend.busy
+                    onSelectionRequested: root.selectItem(index)
                     onActivated: {
-                        listView.currentIndex = index
-                        root.copySelected()
+                        root.selectItem(index)
+                        backend.copy(modelData, root.mode)
                     }
+                    onFavoriteToggled: backend.toggleFavorite(modelData, root.mode)
+                    onRemoveRequested: backend.remove(modelData, root.mode)
                 }
 
                 Text {
@@ -247,33 +276,14 @@ PanelWindow {
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
-                radius: 8
+                radius: Theme.radius
                 color: Theme.surface
 
                 RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: 12
                     anchors.rightMargin: 12
-                    spacing: 8
-
-                    ClipboardButton {
-                        text: "Copy"
-                        enabled: root.selectedItem() !== null && !backend.busy
-                        onClicked: root.copySelected()
-                    }
-
-                    ClipboardButton {
-                        visible: root.mode === "history"
-                        text: "Add favorite"
-                        enabled: root.selectedItem() !== null && !backend.busy
-                        onClicked: backend.addFavorite(root.selectedItem())
-                    }
-
-                    ClipboardButton {
-                        text: root.mode === "favorites" ? "Remove favorite" : "Delete item"
-                        enabled: root.selectedItem() !== null && !backend.busy
-                        onClicked: backend.remove(root.selectedItem(), root.mode)
-                    }
+                    spacing: Theme.gap
 
                     Item { Layout.fillWidth: true }
 
@@ -304,8 +314,8 @@ PanelWindow {
         Rectangle {
             anchors.fill: parent
             visible: root.confirmationVisible
-            color: Theme.overlay
-            radius: 11
+            color: Theme.withAlpha(Theme.bg, Theme.popupOpacity)
+            radius: Theme.radius
 
             MouseArea { anchors.fill: parent }
 
@@ -313,20 +323,20 @@ PanelWindow {
                 anchors.centerIn: parent
                 width: 380
                 height: 150
-                radius: 10
+                radius: Theme.radius
                 color: Theme.surface
-                border.width: 1
-                border.color: Theme.border
+                border.width: Theme.borderWidth
+                border.color: Theme.accent
 
                 ColumnLayout {
                     anchors.fill: parent
                     anchors.margins: 18
-                    spacing: 14
+                    spacing: Theme.outerGap
 
                     Text {
                         Layout.fillWidth: true
                         text: root.confirmationAction === "favorites" ? "Clear all favorites?" : "Clear all clipboard history?"
-                        color: Theme.foreground
+                        color: Theme.fg
                         horizontalAlignment: Text.AlignHCenter
                         font.family: Theme.fontFamily
                         font.pixelSize: 13
@@ -334,7 +344,7 @@ PanelWindow {
 
                     RowLayout {
                         Layout.alignment: Qt.AlignHCenter
-                        spacing: 10
+                        spacing: Theme.outerGap
 
                         ClipboardButton {
                             text: "Cancel"

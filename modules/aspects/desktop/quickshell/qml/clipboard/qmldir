@@ -1,0 +1,5 @@
+singleton Theme 1.0 Theme.qml
+ClipboardBackend 1.0 ClipboardBackend.qml
+ClipboardButton 1.0 ClipboardButton.qml
+ClipboardItem 1.0 ClipboardItem.qml
+ClipboardWindow 1.0 ClipboardWindow.qml
