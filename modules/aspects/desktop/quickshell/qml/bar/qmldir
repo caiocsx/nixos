@@ -1,0 +1,11 @@
+Bar 1.0 Bar.qml
+BarButton 1.0 BarButton.qml
+Workspaces 1.0 Workspaces.qml
+Clock 1.0 Clock.qml
+Notification 1.0 Notification.qml
+Tray 1.0 Tray.qml
+Audio 1.0 Audio.qml
+Brightness 1.0 Brightness.qml
+Bluetooth 1.0 Bluetooth.qml
+Network 1.0 Network.qml
+Battery 1.0 Battery.qml

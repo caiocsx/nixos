@@ -14,7 +14,7 @@
       quickshellConfig = pkgs.runCommandLocal "quickshell-config" { } ''
         cp -r ${./qml} "$out"
         chmod -R u+w "$out"
-        cp ${theme} "$out/clipboard/Theme.qml"
+        cp ${theme} "$out/Theme.qml"
       '';
     in
     {
