@@ -46,6 +46,7 @@
           # gimp
           pkgs.libresprite
           pkgs.opencode
+          pkgs.codex
           pkgs.obsidian
           pkgs.godot
           # bruno
