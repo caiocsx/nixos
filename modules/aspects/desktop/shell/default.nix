@@ -14,9 +14,24 @@
       { pkgs, ... }:
       {
         home.packages = [
+          pkgs.networkmanagerapplet
           pkgs.pavucontrol
           pkgs.playerctl
         ];
+
+        xdg.configFile = {
+          "autostart/blueman.desktop".text = ''
+            [Desktop Entry]
+            Type=Application
+            Hidden=true
+          '';
+
+          "autostart/nm-applet.desktop".text = ''
+            [Desktop Entry]
+            Type=Application
+            Hidden=true
+          '';
+        };
       };
   };
 }

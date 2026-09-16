@@ -23,7 +23,7 @@
     {
       name = "float-system-tools";
       match = {
-        class = "^(org.pulseaudio.pavucontrol|blueman-manager|nm-connection-editor|xdg-desktop-portal-gtk|org.gnome.FileRoller|qalculate-gtk)$";
+        class = "^(org.pulseaudio.pavucontrol|blueman-manager|blueman-services|nm-connection-editor|xdg-desktop-portal-gtk|org.gnome.FileRoller|qalculate-gtk)$";
       };
       float = true;
     }
