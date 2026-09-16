@@ -6,14 +6,5 @@
       den.aspects.xdg
       den.aspects.wallpapers
     ];
-
-    homeManager =
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.pavucontrol
-          pkgs.playerctl
-        ];
-      };
   };
 }
