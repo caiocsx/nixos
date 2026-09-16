@@ -9,6 +9,7 @@ let
 
   dsp = {
     exec = cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
+    app = cmd: lua ''hl.dsp.exec_cmd("uwsm app -- ${cmd}")'';
     close = lua "hl.dsp.window.close()";
     float = lua ''hl.dsp.window.float({ action = "toggle" })'';
     floatSized =
@@ -62,10 +63,10 @@ let
 in
 [
   # --- Applications ---
-  (bind "SUPER + Return" (dsp.exec terminal))
-  (bind "SUPER + B" (dsp.exec browser))
-  (bind "SUPER + E" (dsp.exec editor))
-  (bind "SUPER + F" (dsp.exec fileManager))
+  (bind "SUPER + Return" (dsp.app terminal))
+  (bind "SUPER + B" (dsp.app browser))
+  (bind "SUPER + E" (dsp.app editor))
+  (bind "SUPER + F" (dsp.app fileManager))
   (bind "SUPER + R" (dsp.exec "launcher"))
 
   # --- System Controls & Menus ---
@@ -77,8 +78,8 @@ in
   (bind "SUPER + ESCAPE" (dsp.exec "power-menu"))
   (bind "SUPER + ALT + L" (dsp.exec "hyprlock"))
   (bind "SUPER + A" (dsp.exec "swaync-client -t -sw"))
-  (bind "SUPER + SHIFT + B" (dsp.exec "blueman-manager"))
-  (bind "SUPER + EQUAL" (dsp.exec "qalculate-gtk"))
+  (bind "SUPER + SHIFT + B" (dsp.app "blueman-manager"))
+  (bind "SUPER + EQUAL" (dsp.app "qalculate-gtk"))
   (bind "SUPER + period" (dsp.exec "character-picker"))
 
   # --- Wallpaper Management ---

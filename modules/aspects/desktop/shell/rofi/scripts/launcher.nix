@@ -13,9 +13,12 @@
 
       launcher = pkgs.writeShellApplication {
         name = "launcher";
-        runtimeInputs = [ pkgs.rofi ];
+        runtimeInputs = [
+          pkgs.rofi
+          pkgs.uwsm
+        ];
         text = ''
-          rofi -show drun -theme ${themes.launcher}
+          rofi -show drun -run-command "uwsm app -- {cmd}" -theme ${themes.launcher}
         '';
       };
     in
