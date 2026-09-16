@@ -8,13 +8,17 @@
       den.aspects.hyprsunset
     ];
 
-    homeManager = { pkgs, ... }: {
-      home.packages = [
-        pkgs.hyprpicker
-        pkgs.hyprshutdown
-      ];
+    homeManager =
+      { pkgs, ... }:
+      {
+        imports = [ ./_session.nix ];
 
-      services.polkit-gnome.enable = true;
-    };
+        home.packages = [
+          pkgs.hyprpicker
+          pkgs.hyprshutdown
+        ];
+
+        services.polkit-gnome.enable = true;
+      };
   };
 }
