@@ -12,10 +12,26 @@
     homeManager =
       { pkgs, ... }:
       {
-        imports = [ ./config/_desktop-entries.nix ];
-
         programs.rofi = {
           enable = true;
+        };
+
+        xdg.dataFile = {
+          "applications/rofi.desktop".text = ''
+            [Desktop Entry]
+            Type=Application
+            Name=Rofi
+            Exec=true
+            NoDisplay=true
+          '';
+
+          "applications/rofi-theme-selector.desktop".text = ''
+            [Desktop Entry]
+            Type=Application
+            Name=Rofi Theme Selector
+            Exec=true
+            NoDisplay=true
+          '';
         };
       };
   };
