@@ -28,7 +28,7 @@
 
       config = {
         services.displayManager = {
-          defaultSession = host.compositor;
+          defaultSession = host.defaultSession;
           ly = {
             enable = true;
             x11Support = false;

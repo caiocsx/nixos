@@ -43,7 +43,7 @@
         ];
 
         services.displayManager = {
-          defaultSession = host.compositor;
+          defaultSession = host.defaultSession;
           sddm = {
             enable = true;
             wayland.enable = true;

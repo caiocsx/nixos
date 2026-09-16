@@ -81,40 +81,37 @@
         # users.users.caiocsx.extraGroups = [ "libvirtd" ];
       };
 
-    provides.to-users.homeManager =
-      { lib, pkgs, ... }:
-      {
-        wayland.windowManager.hyprland = {
-          extraConfig = lib.mkAfter ''
-            -- --- Nvidia Env Vars ---
-            hl.env("GBM_BACKEND", "nvidia-drm")
-            hl.env("LIBVA_DRIVER_NAME", "nvidia")
-            hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
-            hl.env("__GL_GSYNC_ALLOWED", "1")
-            hl.env("__GL_VRR_ALLOWED", "1")
-            hl.env("__GL_MaxFramesAllowed", "1")
-          '';
+    provides.to-users.homeManager = { ... }: {
+      home.sessionVariables = {
+        GBM_BACKEND = "nvidia-drm";
+        LIBVA_DRIVER_NAME = "nvidia";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        __GL_GSYNC_ALLOWED = "1";
+        __GL_VRR_ALLOWED = "1";
+        __GL_MaxFramesAllowed = "1";
+      };
 
-          settings = {
-            monitor = [
-              {
-                output = "HDMI-A-1";
-                mode = "1920x1080@180";
-                position = "0x0";
-                scale = "1.0";
-              }
-            ];
+      wayland.windowManager.hyprland = {
+        settings = {
+          monitor = [
+            {
+              output = "HDMI-A-1";
+              mode = "1920x1080@180";
+              position = "0x0";
+              scale = "1.0";
+            }
+          ];
 
-            config.input = {
-              kb_layout = "us";
-              kb_variant = "intl";
-            };
+          config.input = {
+            kb_layout = "us";
+            kb_variant = "intl";
           };
         };
-
-        # --- Optional Home Manager aspect overrides (uncomment to customize) ---
-        # hyprsunset.temperature = 4200;           # Default: 4800
-        # clipboard.maxItems = 1000;               # Default: 750
       };
+
+      # --- Optional Home Manager aspect overrides (uncomment to customize) ---
+      # hyprsunset.temperature = 4200;           # Default: 4800
+      # clipboard.maxItems = 1000;               # Default: 750
+    };
   };
 }
