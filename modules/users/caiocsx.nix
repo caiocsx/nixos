@@ -49,6 +49,7 @@
           pkgs.codex
           pkgs.obsidian
           pkgs.godot
+          pkgs.qalculate-gtk
           # bruno
           pkgs.onlyoffice-desktopeditors
         ];

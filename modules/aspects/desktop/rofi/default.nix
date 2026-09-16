@@ -3,11 +3,9 @@
   den.aspects.rofi = {
     includes = [
       den.aspects.power-menu
-      den.aspects.clipboard-manager
+      den.aspects.clipboard
       den.aspects.launcher
       den.aspects.character-picker
-      den.aspects.calculator
-      den.aspects.network-manager
       den.aspects.wallpaper-picker
     ];
 

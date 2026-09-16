@@ -77,19 +77,18 @@ in
   (bind "SUPER + ESCAPE" (dsp.exec "power-menu"))
   (bind "SUPER + ALT + L" (dsp.exec "hyprlock"))
   (bind "SUPER + A" (dsp.exec "swaync-client -t -sw"))
-  (bind "SUPER + SHIFT + N" (dsp.exec "network-manager"))
   (bind "SUPER + SHIFT + B" (dsp.exec "blueman-manager"))
-  (bind "SUPER + EQUAL" (dsp.exec "calculator"))
+  (bind "SUPER + EQUAL" (dsp.exec "qalculate-gtk"))
   (bind "SUPER + period" (dsp.exec "character-picker"))
 
   # --- Wallpaper Management ---
-  (bind "SUPER + SHIFT + W" (dsp.exec "wallpaper-picker"))
-  (bind "SUPER + SHIFT + A" (dsp.exec "wallpaper-picker --prev"))
-  (bind "SUPER + SHIFT + D" (dsp.exec "wallpaper-picker --next"))
+  (bind "SUPER + W" (dsp.exec "wallpaper-picker"))
+  (bind "SUPER + bracketleft" (dsp.exec "wallpaper-picker --prev"))
+  (bind "SUPER + bracketright" (dsp.exec "wallpaper-picker --next"))
 
   # --- Clipboard Management ---
-  (bind "SUPER + V" (dsp.exec "clipboard-manager -H"))
-  (bind "SUPER + SHIFT + V" (dsp.exec "clipboard-manager"))
+  (bind "SUPER + V" (dsp.exec "clipboard"))
+  (bind "SUPER + SHIFT + V" (dsp.exec "clipboard --wipe"))
 
   # --- Screenshots ---
   (bind "SUPER + PRINT" (dsp.exec "screenshot --window"))
@@ -103,13 +102,13 @@ in
   ))
 
   # --- Window State & Layout ---
+  (bind "SUPER + SPACE" dsp.maximize)
   (bind "SUPER + C" dsp.close)
   (bind "SUPER + SHIFT + C" (dsp.exec "hyprctl kill"))
-  (bind "SUPER + W" (dsp.floatSized 1000 660))
+  (bind "SUPER + SHIFT + W" (dsp.floatSized 1000 660))
   (bind "SUPER + ALT + W" dsp.float)
   (bind "SUPER + P" dsp.pseudo)
-  (bind "SUPER + SPACE" dsp.maximize)
-  (bind "SUPER + ALT + J" (dsp.layout "togglesplit"))
+  (bind "SUPER + T" (dsp.layout "togglesplit"))
   (bind "SUPER + bracketleft" (dsp.layout "splitratio -0.05"))
   (bind "SUPER + bracketright" (dsp.layout "splitratio +0.05"))
 
@@ -117,7 +116,6 @@ in
   (bind "SUPER + H" (dsp.focus "left"))
   (bind "SUPER + L" (dsp.focus "right"))
   (bind "SUPER + K" (dsp.focus "up"))
-  (bind "SUPER + J" (dsp.focus "down"))
   (bind "SUPER + SHIFT + H" (dsp.swap "left"))
   (bind "SUPER + SHIFT + L" (dsp.swap "right"))
   (bind "SUPER + SHIFT + K" (dsp.swap "up"))
@@ -128,6 +126,10 @@ in
   (bindOpts "SUPER + SHIFT + Left" (dsp.resizeActive (-30) 0) { repeating = true; })
   (bindOpts "SUPER + SHIFT + Up" (dsp.resizeActive 0 (-30)) { repeating = true; })
   (bindOpts "SUPER + SHIFT + Down" (dsp.resizeActive 0 30) { repeating = true; })
+
+  # --- Mouse Window Controls ---
+  (bindOpts "SUPER + mouse:272" dsp.drag { mouse = true; })
+  (bindOpts "SUPER + mouse:273" dsp.resize { mouse = true; })
 
   # --- Workspace Navigation & Scratchpad ---
   (bind "SUPER + CTRL + Right" (dsp.focusWorkspace "r+1"))
@@ -166,9 +168,5 @@ in
     locked = true;
     repeating = true;
   })
-
-  # --- Mouse Window Controls ---
-  (bindOpts "SUPER + mouse:272" dsp.drag { mouse = true; })
-  (bindOpts "SUPER + mouse:273" dsp.resize { mouse = true; })
 ]
 ++ workspaceBinds
