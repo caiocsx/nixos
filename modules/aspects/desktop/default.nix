@@ -11,6 +11,7 @@
       den.aspects.theme
       den.aspects.xdg
       den.aspects.wallpapers
+      den.aspects.awww
     ];
 
     homeManager =
