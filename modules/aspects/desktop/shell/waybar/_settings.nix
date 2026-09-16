@@ -277,11 +277,17 @@
 
   network = {
     format-icons = {
-      wifi = "󰖩";
+      wifi = [
+        "󰤯"
+        "󰤟"
+        "󰤢"
+        "󰤥"
+        "󰤨"
+      ];
       ethernet = "󰈀";
-      linked = "󰲝";
-      disabled = "󰖪";
-      disconnected = "󰀝";
+      linked = "󰌚";
+      disconnected = "󰌙";
+      disabled = "󰤭";
     };
     format-wifi = "{icon}";
     format-ethernet = "{icon}";
