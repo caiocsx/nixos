@@ -20,8 +20,8 @@ in
     box-shadow: none;
     border: none;
     min-height: 25px;
-    font-size: 1rem;
     font-family: '${ui.font.propo}';
+    font-size: 15px;
   }
 
   window#waybar {
@@ -35,6 +35,7 @@ in
   }
 
   tooltip label {
+    font-size: 14px;
     color: @fg;
   }
 
@@ -42,6 +43,7 @@ in
   #clock,
   #privacy,
   #tray,
+  #group-tools,
   #pulseaudio.microphone,
   #pulseaudio,
   #backlight,
@@ -57,12 +59,17 @@ in
   #custom-notification:hover,
   #clock:hover,
   #privacy:hover,
+  #custom-cliphist:hover,
+  #custom-bluefilter:hover,
+  #custom-tools:hover,
+  #custom-arrow-left:hover,
   #pulseaudio.microphone:hover,
   #pulseaudio:hover,
   #backlight:hover,
   #bluetooth:hover,
   #network:hover,
-  #battery:hover {
+  #battery:hover,
+  #custom-power:hover {
     transition: all 0.3s ease;
     color: @blue;
   }
@@ -70,6 +77,7 @@ in
   /* Modules Left */
   #clock {
     padding: 0 15px;
+    font-size: 14px;
   }
 
   #tray window decoration {
@@ -119,6 +127,17 @@ in
   }
 
   /* Modules Right */
+  #custom-cliphist,
+  #custom-colorpicker,
+  #custom-bluefilter,
+  #custom-tools,
+  #bluetooth,
+  #network,
+  #battery,
+  #custom-power {
+    padding: 0 8px;
+  }
+
   #pulseaudio-slider,
   #backlight-slider {
     padding: 0 10px;
@@ -146,12 +165,6 @@ in
     min-height: 8px;
     background-color: @fg;
     border-radius: ${toString ui.border.radius}px;
-  }
-
-  #bluetooth,
-  #network,
-  #battery {
-    padding: 0 8px;
   }
 
   #battery.charging.warning,

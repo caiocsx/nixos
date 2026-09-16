@@ -13,7 +13,7 @@
   control-center-margin-right = 0;
   control-center-margin-left = 8;
   notification-window-width = 350;
-  notification-icon-size = 96;
+  notification-icon-size = 64;
   notification-body-image-width = 200;
   notification-body-image-height = 200;
   notification-2fa-action = true;
@@ -32,7 +32,6 @@
     "title"
     "dnd"
     "notifications"
-    "buttons-grid"
   ];
   widget-config = {
     mpris = {
@@ -46,31 +45,6 @@
     };
     dnd = {
       text = "Do Not Disturb";
-    };
-    buttons-grid = {
-      buttons-per-row = 4;
-      actions = [
-        {
-          label = "";
-          command = "swaync-client -cp && sleep 0.6 && hyprpicker -a -f hex -n";
-        }
-        {
-          label = "󰃟";
-          type = "toggle";
-          command = "hyprsunset-toggle";
-          update-command = ''
-            sh -c 'systemctl --user is-active --quiet hyprsunset.service && echo true || echo false'
-          '';
-        }
-        {
-          label = "";
-          command = "swaync-client -cp && screenshot --region";
-        }
-        {
-          label = "";
-          command = "kitty btop";
-        }
-      ];
     };
   };
 }

@@ -21,7 +21,7 @@
     ];
   };
   "custom/notification" = {
-    format = "<span size='12pt'>{icon}</span>";
+    format = "{icon}";
     format-icons = {
       notification = "󱅫";
       none = "󰂜";
@@ -96,9 +96,9 @@
   "hyprland/workspaces" = {
     format = "{icon}";
     format-icons = {
-      active = "";
-      default = "";
-      empty = "";
+      active = "󰝥";
+      default = "󰝥";
+      empty = "󰝥";
     };
     persistent-workspaces = {
       "*" = [
@@ -115,16 +115,71 @@
   "group/group-right" = {
     orientation = "inherit";
     modules = [
+      "group/group-tools"
       "pulseaudio#microphone"
       "group/audio"
       "group/brightness"
       "group/group-system"
     ];
   };
+  "group/group-tools" = {
+    orientation = "inherit";
+    modules = [
+      "group/tools-drawer"
+      "custom/tools"
+    ];
+  };
+  "custom/tools" = {
+    format = "󱌣";
+    tooltip = false;
+  };
+  "group/tools-drawer" = {
+    orientation = "inherit";
+    drawer = {
+      children-class = "tools";
+      transition-left-to-right = true;
+      click-to-reveal = true;
+      transition-duration = 400;
+    };
+    modules = [
+      "custom/arrow-left"
+      "custom/cliphist"
+      "custom/colorpicker"
+      "custom/bluefilter"
+    ];
+  };
+  "custom/arrow-left" = {
+    format = "󰅁";
+    tooltip = false;
+    cursor = true;
+  };
+  "custom/cliphist" = {
+    format = "󱉨";
+    on-click = "clipboard";
+    on-click-right = "clipboard --wipe";
+    tooltip = false;
+  };
+  "custom/colorpicker" = {
+    format = "{}";
+    on-click = "colorpicker";
+    exec = "colorpicker --json";
+    return-type = "json";
+    interval = "once";
+    tooltip = true;
+    signal = 1;
+  };
+  "custom/bluefilter" = {
+    format = "{}";
+    on-click = "bluefilter --toggle";
+    exec = "bluefilter";
+    tooltip = false;
+    interval = "once";
+    signal = 1;
+  };
   "pulseaudio#microphone" = {
     format = "{format_source}";
-    format-source = "<span size='13pt'>󰍬</span>";
-    format-source-muted = "<span size='13pt'>󰍭</span>";
+    format-source = "󰍬";
+    format-source-muted = "󰍭";
     on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
     on-scroll-up = "";
     on-scroll-down = "";
@@ -150,15 +205,15 @@
   };
   pulseaudio = {
     format = "{icon}";
-    format-muted = "<span size='11pt'></span>";
+    format-muted = "󰝟";
     format-icons = {
-      headphone = "<span size='11pt'>󰋋</span>";
-      headset = "<span size='11pt'>󰋎</span>";
-      headset-muted = "<span size='11pt'>󰟎</span>";
+      headphone = "󰋋";
+      headset = "󰋎";
+      headset-muted = "󰋐";
       default = [
-        "<span size='11pt'></span>"
-        "<span size='11pt'></span>"
-        "<span size='11pt'></span>"
+        "󰕿"
+        "󰖀"
+        "󰕾"
       ];
     };
     on-click = "pavucontrol";
@@ -186,12 +241,12 @@
     max = 100;
   };
   backlight = {
-    format = "<span size='11pt'>{icon}</span>";
+    format = "{span>";
     format-icons = [
-      "<span size='11pt'>󰃞</span>"
-      "<span size='11pt'>󰃝</span>"
-      "<span size='11pt'>󰃟</span>"
-      "<span size='11pt'>󰃠</span>"
+      "󰃞"
+      "󰃝"
+      "󰃟"
+      "󰃠"
     ];
     tooltip-format = "Brightness: {percent}%";
     tooltip = true;
@@ -203,14 +258,15 @@
       "bluetooth"
       "network"
       "battery"
+      "custom/power"
     ];
   };
   bluetooth = {
-    format-on = "<span size='13pt'>󰂯</span>";
-    format-off = "<span size='13pt'>󰂲</span>";
-    format-disabled = "<span size='13pt'>󰂲</span>";
-    format-connected = "<span size='13pt'>󰂱</span>";
-    format-no-controller = "<span size='13pt'>󰂯</span>";
+    format-on = "󰂯";
+    format-off = "󰂲";
+    format-disabled = "󰂲";
+    format-connected = "󰂱";
+    format-no-controller = "󰂳";
     tooltip-format = "{device_enumerate}";
     tooltip-format-enumerate-connected = "{device_address}";
     tooltip-format-enumerate-connected-battery = "{device_alias} | Battery {device_battery_percentage}%";
@@ -221,17 +277,11 @@
 
   network = {
     format-icons = {
-      wifi = [
-        "<span size='12pt'>󰤯</span>"
-        "<span size='12pt'>󰤟</span>"
-        "<span size='12pt'>󰤢</span>"
-        "<span size='12pt'>󰤥</span>"
-        "<span size='12pt'>󰤨</span>"
-      ];
-      ethernet = "<span size='12pt'>󰈀</span>";
-      linked = "<span size='12pt'>󰲝</span>";
-      disabled = "<span size='12pt'>󰤭</span>";
-      disconnected = "<span size='12pt'>󰲛</span>";
+      wifi = "󰖩";
+      ethernet = "󰈀";
+      linked = "󰲝";
+      disabled = "󰖪";
+      disconnected = "󰀝";
     };
     format-wifi = "{icon}";
     format-ethernet = "{icon}";
@@ -244,7 +294,7 @@
     tooltip-format-linked = "{ifname}\nConnected, waiting for IP";
     tooltip-format-disconnected = "Disconnected";
     tooltip-format-disabled = "Disabled";
-    on-click = "network-manager";
+    on-click = " nm-connection-editor";
     on-click-right = "kitty -e nmtui";
     tooltip = true;
     max-length = 20;
@@ -265,36 +315,41 @@
     format = "{icon}";
     format-icons = {
       default = [
-        "<span size='12pt'>󰂎</span>"
-        "<span size='12pt'>󰁺</span>"
-        "<span size='12pt'>󰁻</span>"
-        "<span size='12pt'>󰁼</span>"
-        "<span size='12pt'>󰁽</span>"
-        "<span size='12pt'>󰁾</span>"
-        "<span size='12pt'>󰁿</span>"
-        "<span size='12pt'>󰂀</span>"
-        "<span size='12pt'>󰂁</span>"
-        "<span size='12pt'>󰂂</span>"
-        "<span size='12pt'>󰁹</span>"
+        "󰂎"
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰂂"
+        "󰁹"
       ];
       charging = [
-        "<span size='12pt'>󰢟</span>"
-        "<span size='12pt'>󰢜</span>"
-        "<span size='12pt'>󰂆</span>"
-        "<span size='12pt'>󰂇</span>"
-        "<span size='12pt'>󰂈</span>"
-        "<span size='12pt'>󰢝</span>"
-        "<span size='12pt'>󰂉</span>"
-        "<span size='12pt'>󰢞</span>"
-        "<span size='12pt'>󰂊</span>"
-        "<span size='12pt'>󰂋</span>"
-        "<span size='12pt'>󰂅</span>"
+        "󰢟"
+        "󰢜"
+        "󰂆"
+        "󰂇"
+        "󰂈"
+        "󰢝"
+        "󰂉"
+        "󰢞"
+        "󰂊"
+        "󰂋"
+        "󰂅"
       ];
     };
-    format-critical = "<span size='12pt'>󰂃</span>";
+    format-critical = "󰂃";
     tooltip-format = "{capacity}% - {time} remaining";
     tooltip-format-charging = "Charging: {capacity}% - {time} until full";
     tooltip = true;
     interval = 10;
+  };
+  "custom/power" = {
+    format = "󰤆";
+    on-click = "power-menu";
+    tooltip = false;
   };
 }
