@@ -241,7 +241,7 @@
     max = 100;
   };
   backlight = {
-    format = "{}";
+    format = "{icon}";
     format-icons = [
       "󰃞"
       "󰃝"
