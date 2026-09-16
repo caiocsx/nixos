@@ -20,8 +20,6 @@ in
     box-shadow: none;
     border: none;
     min-height: 25px;
-    font-family: '${ui.font.propo}';
-    font-size: 15px;
   }
 
   window#waybar {
