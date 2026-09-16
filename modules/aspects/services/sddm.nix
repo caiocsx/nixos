@@ -3,6 +3,7 @@
   den.aspects.sddm.nixos =
     {
       config,
+      host,
       lib,
       pkgs,
       ...
@@ -42,7 +43,7 @@
         ];
 
         services.displayManager = {
-          defaultSession = "hyprland";
+          defaultSession = host.compositor;
           sddm = {
             enable = true;
             wayland.enable = true;

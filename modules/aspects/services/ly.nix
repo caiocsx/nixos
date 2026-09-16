@@ -4,6 +4,7 @@
     {
       config,
       lib,
+      host,
       pkgs,
       ...
     }:
@@ -27,7 +28,7 @@
 
       config = {
         services.displayManager = {
-          defaultSession = "hyprland";
+          defaultSession = host.compositor;
           ly = {
             enable = true;
             x11Support = false;
