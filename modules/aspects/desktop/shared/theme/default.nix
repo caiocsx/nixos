@@ -10,7 +10,7 @@
           enable = true;
           polarity = "dark";
           base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-          image = ../../../../assets/wallpapers/porsche.jpg;
+          image = ../../../../../assets/wallpapers/porsche.jpg;
           cursor = {
             name = "Bibata-Modern-Ice";
             package = pkgs.bibata-cursors;

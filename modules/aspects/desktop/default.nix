@@ -3,25 +3,8 @@
   den.aspects.desktop = {
     includes = [
       den.aspects.hyprland-suite
-      den.aspects.rofi
-      den.aspects.waybar
-      den.aspects.swaync
-      den.aspects.clipboard
-      den.aspects.screenshot
-      den.aspects.theme
-      den.aspects.xdg
-      den.aspects.wallpapers
-      den.aspects.awww
+      den.aspects.desktop-shell
+      den.aspects.desktop-shared
     ];
-
-    homeManager =
-      { pkgs, ... }:
-      {
-        home.packages = [
-          pkgs.networkmanagerapplet
-          pkgs.pavucontrol
-          pkgs.playerctl
-        ];
-      };
   };
 }

@@ -75,9 +75,9 @@ Centralizing feature implementation creates hidden coupling and makes future rep
 
 ## Centralized appearance
 
-All cross-cutting visual values live in `modules/aspects/desktop/theme/_ui.nix`.
+All cross-cutting visual values live in `modules/aspects/desktop/shared/theme/_ui.nix`.
 
-They are exposed to home-manager aspects through `_module.args.ui`, wired from the `theme` aspect in `modules/aspects/desktop/theme/default.nix`.
+They are exposed to home-manager aspects through `_module.args.ui`, wired from the `theme` aspect in `modules/aspects/desktop/shared/theme/default.nix`.
 
 `ui` is the single source of truth for shared presentation values such as:
 

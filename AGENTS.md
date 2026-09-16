@@ -77,7 +77,7 @@ For Den-specific mechanisms and conventions, read [`docs/den-conventions.md`](do
 
 ## Shared appearance
 
-Cross-cutting visual values have a single source of truth in `modules/aspects/desktop/theme/_ui.nix`, exposed to home-manager aspects through `_module.args.ui` from the `theme` aspect.
+Cross-cutting visual values have a single source of truth in `modules/aspects/desktop/shared/theme/_ui.nix`, exposed to home-manager aspects through `_module.args.ui` from the `theme` aspect.
 
 Use `ui` for shared values such as colors, border radius, and typography. Do not duplicate an existing shared visual value inside an individual aspect.
 
