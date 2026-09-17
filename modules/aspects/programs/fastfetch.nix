@@ -13,24 +13,24 @@
             }
             {
               type = "title";
-              key = "    User";
+              key = "   󰀄 User";
               keyColor = "blue";
               format = "{1}@{2}";
             }
             {
               type = "kernel";
-              key = "    Kernel";
+              key = "   󰻀 Kernel";
               keyColor = "blue";
             }
             {
               type = "os";
-              key = "   󰣇 OS";
+              key = "    OS";
               keyColor = "blue";
               format = "{2}";
             }
             {
               type = "wm";
-              key = "   󱗃 WM";
+              key = "   󰖯 WM";
               keyColor = "blue";
               format = "{2}";
             }
@@ -48,25 +48,26 @@
               format = "┌────────────────────Hardware─────────────────────┐";
             }
             {
-              type = "host";
-              key = "    PC";
+              type = "cpu";
+              key = "   󰻠 CPU";
               keyColor = "yellow";
+              format = "{1}";
             }
             {
-              type = "cpu";
-              key = "    CPU";
+              type = "gpu";
+              key = "   󰢮 GPU";
               keyColor = "yellow";
-              format = "{1} ({3})";
+              format = "{1}";
             }
             {
               type = "memory";
-              key = "    Memory";
+              key = "   󰍛 Memory";
               keyColor = "yellow";
               format = "{1} / {2} ({3})";
             }
             {
               type = "disk";
-              key = "   󱦟 Disk";
+              key = "   󰋊 Disk";
               keyColor = "yellow";
               format = "{1} / {2} ({3})";
               folders = "/";
@@ -81,17 +82,17 @@
             }
             {
               type = "datetime";
-              key = "    DateTime";
+              key = "   󰙹 DateTime";
               keyColor = "magenta";
             }
             {
               type = "uptime";
-              key = "   󰅐 Uptime";
+              key = "   󱑆 Uptime";
               keyColor = "magenta";
             }
             {
               type = "disk";
-              key = "    OS Age";
+              key = "   󰞌 OS Age";
               keyColor = "magenta";
               format = "{days} days";
               folders = "/";
