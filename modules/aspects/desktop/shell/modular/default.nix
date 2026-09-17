@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.aspects.desktop-shell = {
+  den.aspects.modular-shell = {
     includes = [
       den.aspects.rofi
       den.aspects.swaync
