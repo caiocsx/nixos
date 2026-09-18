@@ -1,7 +1,7 @@
 { ... }:
 {
   den.aspects.direnv.homeManager =
-    { pkgs, ... }:
+    { ... }:
     {
       programs.direnv = {
         enable = true;

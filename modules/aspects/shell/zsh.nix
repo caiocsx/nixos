@@ -23,7 +23,7 @@
           };
           initContent = ''
             export YSU_IGNORED_ALIASES=("ls" "eza")
-            
+
             setopt share_history
             setopt correct
 
