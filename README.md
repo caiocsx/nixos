@@ -63,7 +63,11 @@ Every host — and, if needed, every user — needs to already exist in the repo
 
 3. **Declare both together** in `hosts.nix`:
    ```nix
-   den.hosts.x86_64-linux.<host>.users.<user> = { };
+   den.hosts.x86_64-linux.<host> = {
+     compositor = "hyprland";
+     displayManager = "noctalia-greeter";
+     users.<user>.desktopShell = "noctalia";
+   };
    ```
 
 Once this is done, follow whichever installation option applies to you below.
@@ -131,44 +135,54 @@ A few things that are easy to be caught off guard by right after a fresh install
 
 **Some apps need a first manual launch to fully apply their settings.** VSCodium and Zen Browser, in particular, may not reflect all declared personalization (extensions, settings) until you open them at least once after activation. This is expected — just launch them once after logging in for the first time.
 
-**Wallpaper starts empty.** The first login has no wallpaper set. Set one with `SUPER + SHIFT + W` (see [Default keybinds](#default-keybinds)) — the images bundled in `assets/wallpapers/` are available immediately.
+**Wallpaper starts empty.** The first login has no wallpaper set. Set one with `SUPER + W` (see [Default keybinds](#default-keybinds)) — the images bundled in `assets/wallpapers/` are available immediately.
 
 ## Default keybinds
 
-| Keybind                | Action                    |
-| ---------------------- | ------------------------- |
-| `SUPER + Q`            | Open terminal             |
-| `SUPER + C `           | Close Window              |
-| `SUPER + (1-9)`        | Move to workspace         |
-| `SUPER + F`            | Open browser              |
-| `SUPER + D`            | Open editor               |
-| `SUPER + E`            | Open file manager         |
-| `SUPER + R`            | App launcher (rofi)       |
-| `SUPER + L`            | Lock screen               |
-| `SUPER + ESCAPE`       | Power menu                |
-| `SUPER + A`            | Toggle notification center|
-| `SUPER + N`            | Network manager           |
-| `SUPER + SHIFT + W`    | Wallpaper picker          |
-| `SUPER + SHIFT + V`    | Clipboard manager         |
+| Keybind                         | Action                       |
+| ------------------------------- | ---------------------------- |
+| `SUPER + Return`                | Open terminal                |
+| `SUPER + B`                     | Open browser                 |
+| `SUPER + E`                     | Open editor                  |
+| `SUPER + F`                     | Open file manager            |
+| `SUPER + Q`                     | Close active window          |
+| `SUPER + R`                     | Open application launcher    |
+| `SUPER + ALT + L`               | Lock session                 |
+| `SUPER + ESCAPE`                | Open power menu              |
+| `SUPER + A`                     | Toggle control center        |
+| `SUPER + SHIFT + B`             | Toggle status bar            |
+| `SUPER + W`                     | Open wallpaper picker        |
+| `SUPER + ALT + [` / `]`         | Previous/next wallpaper      |
+| `SUPER + V`                     | Open clipboard history       |
+| `SUPER + SHIFT + V`             | Clear clipboard history      |
+| `SUPER + 1`–`9`                 | Focus workspace              |
+| `SUPER + SHIFT + 1`–`9`         | Move window to workspace     |
+| `SUPER + H` / `J` / `K` / `L`  | Focus adjacent window        |
+| `SUPER + Print`                 | Capture active window        |
+| `SUPER + SHIFT + Print`         | Capture selected region      |
+| `SUPER + CTRL + Print`          | Capture current output       |
 
-`SUPER + F` / `D` / `E` open whatever is currently set as `$BROWSER` / `$EDITOR` / `$FILE_MANAGER` — see [Swapping a default program](#swapping-a-default-program) to change them.
+`SUPER + Return` / `B` / `E` / `F` open whatever is currently set as `$TERMINAL` / `$BROWSER` / `$EDITOR` / `$FILE_MANAGER` — see [Swapping a default program](#swapping-a-default-program) to change them.
 
 ## Project structure
 
 ```
 .
 ├── assets/
-│   └── wallpapers/                # images used by the wallpaper script in rofi/awww
+│   ├── nixos.png                  # Nix logo used by Fastfetch
+│   ├── nixos-white.png            # Nix logo used by Noctalia
+│   └── wallpapers/                # images used by the wallpaper integrations
 ├── modules/
-│   ├── core/                      # system fundamentals, always active on every host
-│   │   ├── locale.nix             # language (mkDefault, overridable per host)
-│   │   ├── nix.nix                # Nix daemon settings (gc, experimental-features...)
-│   │   ├── nixpkgs.nix            # pkgs config: unfree, insecure, overlays, useGlobalPkgs
-│   │   ├── packages.nix           # system utilities without their own aspect
-│   │   └── time.nix               # timezone (mkDefault, overridable per host)
-│   │
-│   ├── desktop/                   # graphical environment
-│   │   └── hyprland/              # everything coupled to the Hyprland compositor
+│   ├── aspects/
+│   │   ├── core/                  # system fundamentals, active on every host
+│   │   ├── desktop/               # graphical environment
+│   │   │   ├── compositors/hypr/  # Hyprland and shell integrations
+│   │   │   ├── shared/            # shell-independent desktop configuration
+│   │   │   └── shell/             # selectable modular and Noctalia shells
+│   │   ├── gaming/
+│   │   ├── programs/              # one aspect per program
+│   │   ├── services/              # optional daemons and system capabilities
+│   │   └── shell/                 # interactive shell and CLI tools
 │   │
 │   ├── hosts/                     # host-specific configuration
 │   │   ├── pad/
@@ -178,9 +192,6 @@ A few things that are easy to be caught off guard by right after a fresh install
 │   │       ├── _hardware-configuration.nix
 │   │       └── default.nix
 │   │
-│   ├── programs/                  # one aspect per program
-│   ├── services/                  # optional system daemons/services
-│   ├── shell/
 │   ├── users/
 │   │   └── caiocsx.nix            # defines the user and which aspects it includes
 │   │
@@ -247,7 +258,7 @@ Every workflow below ends with this same sequence. Once the config is installed,
 
 1. Create `hosts/<host>/default.nix` with `den.aspects.<host>.nixos = { ... };`.
 2. Generate the hardware configuration: `nixos-generate-config --root /mnt`, copy the result into `hosts/<host>/_hardware-configuration.nix`.
-3. Declare the host in `hosts.nix`: `den.hosts.x86_64-linux.<host>.users.<user> = { };`.
+3. Declare its compositor, display manager, desktop shell, and users in `hosts.nix`.
 4. Test with `nix run .#vm-<host>` if the change involves anything risky (GPU driver, bootloader), then [apply the changes](#applying-changes).
 
 ### Adding a new aspect
