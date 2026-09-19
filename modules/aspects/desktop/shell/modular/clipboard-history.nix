@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.clipboard.homeManager =
+  den.aspects.clipboard-history.homeManager =
     {
       config,
       lib,
@@ -12,7 +12,7 @@
     in
     {
       options.clipboard.maxItems = lib.mkOption {
-        type = lib.types.int;
+        type = lib.types.ints.positive;
         default = 750;
         description = "Maximum number of items saved in the cliphist history.";
       };

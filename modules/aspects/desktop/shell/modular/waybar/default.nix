@@ -5,14 +5,11 @@
     let
       settings = import ./_settings.nix { inherit ui; };
       style = import ./_style.nix { inherit ui; };
-      bluefilter = import ./scripts/_bluefilter.nix { inherit pkgs; };
-      colorpicker = import ./scripts/_colorpicker.nix { inherit pkgs; };
     in
     {
-      home.packages = [
-        bluefilter
-        colorpicker
-      ];
+      imports = [ ./_contract.nix ];
+
+      home.packages = [ pkgs.libnotify ];
 
       programs.waybar = {
         enable = true;

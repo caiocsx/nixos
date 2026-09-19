@@ -7,7 +7,7 @@
         enable = true;
         settings = {
           general = {
-            lock_cmd = "pidof hyprlock || hyprlock";
+            lock_cmd = "session-lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl eval 'hl.dispatch(hl.dsp.dpms({'on'}))' && hyprctl hyprsunset gamma 100";
             on_unlock_cmd = "hyprctl hyprsunset gamma 100";

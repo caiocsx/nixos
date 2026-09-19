@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.screenshot.homeManager =
+  den.aspects.hyprland-screenshot.homeManager =
     { config, pkgs, ... }:
     let
       screenshot = pkgs.writeShellApplication {

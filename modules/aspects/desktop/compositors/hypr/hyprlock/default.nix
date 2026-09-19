@@ -1,7 +1,12 @@
 { den, ... }:
 {
   den.aspects.hyprlock.homeManager =
-    { config, pkgs, ui, ... }:
+    {
+      config,
+      pkgs,
+      ui,
+      ...
+    }:
     let
       settings = import ./_settings.nix { inherit config ui; };
       hyprlockMedia = import ./scripts/_hyprlock-media.nix { inherit pkgs; };
@@ -9,6 +14,8 @@
       hyprlockSysStatus = import ./scripts/_hyprlock-sys-status.nix { inherit pkgs; };
     in
     {
+      imports = [ ./_contract.nix ];
+
       home.packages = [
         pkgs.libnotify
         hyprlockMedia

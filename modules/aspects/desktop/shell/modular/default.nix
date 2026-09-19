@@ -5,33 +5,16 @@
       den.aspects.rofi
       den.aspects.swaync
       den.aspects.waybar
-      den.aspects.awww
-      den.aspects.clipboard
-      den.aspects.screenshot
+      den.aspects.clipboard-history
     ];
 
     homeManager =
       { pkgs, ... }:
       {
         home.packages = [
-          pkgs.networkmanagerapplet
+          pkgs.bluetui
           pkgs.pavucontrol
-          pkgs.playerctl
         ];
-
-        xdg.configFile = {
-          "autostart/blueman.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Hidden=true
-          '';
-
-          "autostart/nm-applet.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Hidden=true
-          '';
-        };
       };
   };
 }

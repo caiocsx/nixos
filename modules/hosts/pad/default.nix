@@ -2,8 +2,7 @@
 {
   den.aspects.pad = {
     includes = [
-      den.aspects.ly
-      # den.aspects.sddm
+      den.aspects.display-manager
       # den.aspects.libvirt
       # den.aspects.ollama
       # den.aspects.gaming
@@ -39,6 +38,11 @@
           };
         };
         services = {
+          displayManager.noctalia-greeter.settings.keyboard = {
+            layout = "br";
+            variant = "";
+          };
+
           xserver = {
             videoDrivers = [ "amdgpu" ];
             xkb = {
@@ -47,13 +51,9 @@
             };
           };
 
-          # --- Optional aspect overrides (uncomment to customize) ---
-          # displayManager = {
-          # ly.animation = "doom";                 # Default: "matrix"
-          # sddm.astronaut.theme = "cyberpunk";    # Default: "pixel_sakura"
-          # };
-
-          power-profiles-daemon.enable = true;
+          # --- Optional display-manager overrides ---
+          # displayManager.ly.animation = "doom";              # Default: "matrix"
+          # displayManager.sddm.astronaut.theme = "cyberpunk"; # Default: "pixel_sakura"
         };
 
         # --- System locale & user overrides ---
@@ -63,11 +63,16 @@
       };
 
     provides.to-users.homeManager =
-      { pkgs, ... }:
+      {
+        host,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         home.packages = [ pkgs.brightnessctl ];
 
-        wayland.windowManager.hyprland.settings = {
+        wayland.windowManager.hyprland.settings = lib.mkIf (host.compositor == "hyprland") {
           monitor = [
             {
               output = "eDP-1";

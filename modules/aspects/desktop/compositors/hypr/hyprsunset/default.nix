@@ -1,7 +1,12 @@
 { ... }:
 {
   den.aspects.hyprsunset.homeManager =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       hyprsunsetToggle = import ./scripts/_hyprsunset-toggle.nix { inherit pkgs; };
     in

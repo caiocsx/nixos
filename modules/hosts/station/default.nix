@@ -2,8 +2,7 @@
 {
   den.aspects.station = {
     includes = [
-      den.aspects.ly
-      # den.aspects.sddm
+      den.aspects.display-manager
       # den.aspects.libvirt
       den.aspects.ollama
       den.aspects.gaming
@@ -52,6 +51,11 @@
           };
         };
         services = {
+          displayManager.noctalia-greeter.settings.keyboard = {
+            layout = "us";
+            variant = "intl";
+          };
+
           xserver = {
             videoDrivers = [ "nvidia" ];
 
@@ -61,11 +65,9 @@
             };
           };
 
-          # --- Optional aspect overrides (uncomment to customize) ---
-          # displayManager = {
-          # ly.animation = "doom";                 # Default: "matrix"
-          # sddm.astronaut.theme = "cyberpunk";    # Default: "pixel_sakura"
-          # };
+          # --- Optional display-manager overrides ---
+          # displayManager.ly.animation = "doom";              # Default: "matrix"
+          # displayManager.sddm.astronaut.theme = "cyberpunk"; # Default: "pixel_sakura"
 
           ollama = {
             package = pkgs.ollama-cuda;
@@ -81,37 +83,50 @@
         # users.users.caiocsx.extraGroups = [ "libvirtd" ];
       };
 
-    provides.to-users.homeManager = { ... }: {
-      home.sessionVariables = {
-        GBM_BACKEND = "nvidia-drm";
-        LIBVA_DRIVER_NAME = "nvidia";
-        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-        __GL_GSYNC_ALLOWED = "1";
-        __GL_VRR_ALLOWED = "1";
-        __GL_MaxFramesAllowed = "1";
-      };
+    provides.to-users.homeManager =
+      {
+        host,
+        lib,
+        pkgs,
+        ...
+      }:
+      {
+        home.packages = [
+          pkgs.opencode
+          pkgs.libresprite
+          pkgs.godot
+        ];
 
-      wayland.windowManager.hyprland = {
-        settings = {
-          monitor = [
-            {
-              output = "HDMI-A-1";
-              mode = "1920x1080@180";
-              position = "0x0";
-              scale = "1.0";
-            }
-          ];
+        home.sessionVariables = {
+          GBM_BACKEND = "nvidia-drm";
+          LIBVA_DRIVER_NAME = "nvidia";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+          __GL_GSYNC_ALLOWED = "1";
+          __GL_VRR_ALLOWED = "1";
+          __GL_MaxFramesAllowed = "1";
+        };
 
-          config.input = {
-            kb_layout = "us";
-            kb_variant = "intl";
+        wayland.windowManager.hyprland = lib.mkIf (host.compositor == "hyprland") {
+          settings = {
+            monitor = [
+              {
+                output = "HDMI-A-1";
+                mode = "1920x1080@180";
+                position = "0x0";
+                scale = "1.0";
+              }
+            ];
+
+            config.input = {
+              kb_layout = "us";
+              kb_variant = "intl";
+            };
           };
         };
-      };
 
-      # --- Optional Home Manager aspect overrides (uncomment to customize) ---
-      # hyprsunset.temperature = 4200;           # Default: 4800
-      # clipboard.maxItems = 1000;               # Default: 750
-    };
+        # --- Optional Home Manager aspect overrides (uncomment to customize) ---
+        # hyprsunset.temperature = 4200;           # Default: 4800
+        # clipboard.maxItems = 1000;               # Default: 750
+      };
   };
 }

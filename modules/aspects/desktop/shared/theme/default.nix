@@ -67,28 +67,34 @@
           zen-browser.profileNames = [ "default" ];
         };
 
-        xdg.dataFile = {
-          "applications/qt5ct.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=Qt5 Configuration
-            Exec=true
-            NoDisplay=true
-          '';
-          "applications/qt6ct.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=Qt6 Configuration
-            Exec=true
-            NoDisplay=true
-          '';
-          "applications/kvantummanager.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=Kvantum Manager
-            Exec=true
-            NoDisplay=true
-          '';
+        xdg = {
+          configFile = {
+            "gtk-3.0/gtk.css".force = true;
+            "gtk-4.0/gtk.css".force = true;
+          };
+          dataFile = {
+            "applications/qt5ct.desktop".text = ''
+              [Desktop Entry]
+              Type=Application
+              Name=Qt5 Configuration
+              Exec=true
+              NoDisplay=true
+            '';
+            "applications/qt6ct.desktop".text = ''
+              [Desktop Entry]
+              Type=Application
+              Name=Qt6 Configuration
+              Exec=true
+              NoDisplay=true
+            '';
+            "applications/kvantummanager.desktop".text = ''
+              [Desktop Entry]
+              Type=Application
+              Name=Kvantum Manager
+              Exec=true
+              NoDisplay=true
+            '';
+          };
         };
       };
   };

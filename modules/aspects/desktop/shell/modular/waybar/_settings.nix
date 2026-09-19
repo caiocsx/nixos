@@ -270,7 +270,7 @@
     tooltip-format = "{device_enumerate}";
     tooltip-format-enumerate-connected = "{device_address}";
     tooltip-format-enumerate-connected-battery = "{device_alias} | Battery {device_battery_percentage}%";
-    on-click = "blueman-manager";
+    on-click = "kitty -e bluetui";
     on-click-right = "rfkill toggle bluetooth";
     tooltip = true;
   };
@@ -300,8 +300,8 @@
     tooltip-format-linked = "{ifname}\nConnected, waiting for IP";
     tooltip-format-disconnected = "Disconnected";
     tooltip-format-disabled = "Disabled";
-    on-click = " nm-connection-editor";
-    on-click-right = "kitty -e nmtui";
+    on-click = "kitty -e nmtui";
+    on-click-right = "rfkill toggle wifi";
     tooltip = true;
     max-length = 20;
     interval = 5;

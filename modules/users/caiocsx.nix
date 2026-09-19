@@ -10,12 +10,12 @@
 
       den.aspects.zsh
       den.aspects.cli-tools
+      den.aspects.docker
+      den.aspects.kde-connect
       den.aspects.git
       den.aspects.btop
       den.aspects.fastfetch
       den.aspects.direnv
-      den.aspects.docker
-      den.aspects.flatpak
 
       den.aspects.kitty
       den.aspects.thunar
@@ -28,14 +28,6 @@
       den.aspects.zen-browser
     ];
 
-    user =
-      { ... }:
-      {
-        extraGroups = [
-          "docker"
-        ];
-      };
-
     homeManager =
       { pkgs, ... }:
       {
@@ -44,11 +36,8 @@
           pkgs.proton-pass
           pkgs.protonmail-desktop
           # gimp
-          pkgs.libresprite
-          pkgs.opencode
           pkgs.codex
           pkgs.obsidian
-          pkgs.godot
           pkgs.qalculate-gtk
           # bruno
           pkgs.onlyoffice-desktopeditors

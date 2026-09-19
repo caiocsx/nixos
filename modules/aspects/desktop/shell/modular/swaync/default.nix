@@ -7,6 +7,8 @@
       style = import ./_style.nix { inherit ui; };
     in
     {
+      imports = [ ./_contract.nix ];
+
       home.packages = [ pkgs.libnotify ];
 
       services.swaync = {

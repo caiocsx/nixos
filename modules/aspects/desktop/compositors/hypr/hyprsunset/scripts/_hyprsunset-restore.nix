@@ -2,7 +2,10 @@
 
 pkgs.writeShellApplication {
   name = "hyprsunset-restore";
-  runtimeInputs = [ pkgs.coreutils ];
+  runtimeInputs = [
+    pkgs.coreutils
+    pkgs.systemd
+  ];
   text = ''
     STATE_FILE="$HOME/.local/state/hyprsunset-enabled"
 
